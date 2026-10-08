@@ -4,5 +4,5 @@ project(Game)
 find_package(glfw3 REQUIRED)
 find_package(OpenGL REQUIRED)
 
-add_executable(game main.cpp Player.cpp)
+add_executable(game src/main.cpp src/player/Player.cpp)
 target_link_libraries(game glfw OpenGL::GL)

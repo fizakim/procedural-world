@@ -1,5 +1,5 @@
 #include <GLFW/glfw3.h>
-#include "Player.h"
+#include "player/Player.h"
 
 int main() {
     glfwInit();
