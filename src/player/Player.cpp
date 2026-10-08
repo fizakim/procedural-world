@@ -1,11 +1,30 @@
 #include "Player.h"
 #include <GLFW/glfw3.h>
+#include <cmath>
+
+static const float DEG2RAD = 3.14159265f / 180.0f;
+
+void Player::look(float dx, float dy) {
+    yaw += dx;
+    pitch -= dy;
+    if (pitch > 89.0f) pitch = 89.0f;
+    if (pitch < -89.0f) pitch = -89.0f;
+}
 
 void Player::move(float right, float forward) {
-    x += right;
-    z -= forward;
+    float yawRad = yaw * DEG2RAD;
+    float pitchRad = pitch * DEG2RAD;
+
+    x += std::sin(yawRad) * std::cos(pitchRad) * forward;
+    y += std::sin(pitchRad) * forward;
+    z -= std::cos(yawRad) * std::cos(pitchRad) * forward;
+
+    x += std::cos(yawRad) * right;
+    z += std::sin(yawRad) * right;
 }
 
 void Player::applyCamera() {
+    glRotatef(-pitch, 1, 0, 0);
+    glRotatef(yaw, 0, 1, 0);
     glTranslatef(-x, -y, -z);
 }
