@@ -1,5 +1,6 @@
 #include "Player.h"
 #include "../window/Window.h"
+#include "../terrain/Terrain.h"
 #include <cmath>
 
 static const float DEG2RAD = 3.14159265f / 180.0f;
@@ -33,6 +34,24 @@ void Player::move(float right, float forward) {
 
     x += std::cos(yawRad) * right;
     z += std::sin(yawRad) * right;
+}
+
+void Player::keepAboveTerrain(Terrain& terrain) {
+    float x0 = std::floor(x);
+    float z0 = std::floor(z);
+    float dx = x - x0;
+    float dz = z - z0;
+
+    float a = terrain.heightAt(x0, z0);
+    float b = terrain.heightAt(x0 + 1, z0);
+    float c = terrain.heightAt(x0, z0 + 1);
+    float d = terrain.heightAt(x0 + 1, z0 + 1);
+
+    float top = a + (b - a) * dx;
+    float bottom = c + (d - c) * dx;
+    float groundY = top + (bottom - top) * dz;
+
+    if (y < groundY + 0.5f) y = groundY + 0.5f;
 }
 
 void Player::applyCamera() {

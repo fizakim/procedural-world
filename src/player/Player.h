@@ -1,6 +1,7 @@
 #pragma once
 
 class Window;
+class Terrain;
 
 class Player {
 public:
@@ -14,5 +15,6 @@ public:
     void update(Window& window);
     void look(float dx, float dy);
     void move(float right, float forward);
+    void keepAboveTerrain(Terrain& terrain);
     void applyCamera();
 };

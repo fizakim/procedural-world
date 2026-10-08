@@ -14,6 +14,7 @@ int main() {
     while (window.isOpen()) {
         window.update();
         player.update(window);
+        player.keepAboveTerrain(terrain);
         terrain.update(player.x, player.z);
         spheres.update(player.x, player.z, terrain);
 
