@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include "player/Player.h"
 #include "object/Sphere.h"
+#include "terrain/FlatTerrain.h"
 
 int main() {
     glfwInit();
@@ -12,6 +13,8 @@ int main() {
     glfwSetInputMode(window, GLFW_CURSOR, GLFW_CURSOR_DISABLED);
 
     Player player;
+
+    FlatTerrain terrain;
 
     Sphere sphere;
     sphere.y = 1.5f;
@@ -49,6 +52,7 @@ int main() {
         glLoadIdentity();
         player.applyCamera();
 
+        terrain.draw();
         sphere.draw();
 
         glfwSwapBuffers(window);
