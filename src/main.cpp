@@ -15,6 +15,7 @@ int main() {
     while (window.isOpen()) {
         window.update();
         player.update(window);
+        terrain.update(player.x, player.z);
 
         window.begin3D();
         player.applyCamera();
