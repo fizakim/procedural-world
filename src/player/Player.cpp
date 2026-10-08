@@ -9,7 +9,7 @@ void Player::update(Window& window) {
 
     look(window.mouse_dx, window.mouse_dy);
 
-    float step = 0.025f;
+    float step = 0.25f;
     if (window.keyDown(GLFW_KEY_W)) move(0, step);
     if (window.keyDown(GLFW_KEY_S)) move(0, -step);
     if (window.keyDown(GLFW_KEY_A)) move(-step, 0);

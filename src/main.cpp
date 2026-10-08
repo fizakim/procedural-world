@@ -1,6 +1,6 @@
 #include "window/Window.h"
 #include "player/Player.h"
-#include "object/Sphere.h"
+#include "object/SphereField.h"
 #include "terrain/PerlinTerrain.h"
 
 int main() {
@@ -9,19 +9,18 @@ int main() {
     PerlinTerrain terrain;
     terrain.setPattern(std::make_unique<CheckeredPattern>());
 
-    Sphere sphere;
-    sphere.y = 1.5f;
-    sphere.z = -3;
+    SphereField spheres;
 
     while (window.isOpen()) {
         window.update();
         player.update(window);
         terrain.update(player.x, player.z);
+        spheres.update(player.x, player.z, terrain);
 
         window.begin3D();
         player.applyCamera();
         terrain.draw();
-        sphere.draw();
+        spheres.draw();
         window.endFrame();
     }
 }
