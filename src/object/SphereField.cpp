@@ -1,4 +1,5 @@
 #include "SphereField.h"
+#include "../player/Player.h"
 #include <cmath>
 #include <cstdlib>
 
@@ -40,6 +41,33 @@ void SphereField::update(float playerX, float playerZ, Terrain& terrain) {
             if (chunks.count(key) == 0) {
                 chunks[key] = makeChunk(x, z, terrain);
             }
+        }
+    }
+}
+
+void SphereField::collide(Player& player) {
+    const float playerRadius = 0.5f;
+
+    for (auto& entry : chunks) {
+        for (Sphere& sphere : entry.second) {
+            float dx = player.x - sphere.x;
+            float dy = player.y - sphere.y;
+            float dz = player.z - sphere.z;
+            float minDist = sphere.radius + playerRadius;
+            float distSq = dx * dx + dy * dy + dz * dz;
+
+            if (distSq >= minDist * minDist) continue;
+
+            if (distSq < 1e-6f) {
+                player.y = sphere.y + minDist;
+                continue;
+            }
+
+            float dist = std::sqrt(distSq);
+            float push = (minDist - dist) / dist;
+            player.x += dx * push;
+            player.y += dy * push;
+            player.z += dz * push;
         }
     }
 }

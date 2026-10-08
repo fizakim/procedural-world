@@ -4,6 +4,8 @@
 #include <map>
 #include <vector>
 
+class Player;
+
 class SphereField {
 public:
     int seed = 1;
@@ -12,6 +14,7 @@ public:
     int maxSpheres = 2;
 
     void update(float playerX, float playerZ, Terrain& terrain);
+    void collide(Player& player);
     void draw();
 
 private:
