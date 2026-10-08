@@ -1,5 +1,7 @@
 #pragma once
 
+class Window;
+
 class Player {
 public:
     float x = 0;
@@ -9,6 +11,7 @@ public:
     float yaw = 0;
     float pitch = 0;
 
+    void update(Window& window);
     void look(float dx, float dy);
     void move(float right, float forward);
     void applyCamera();

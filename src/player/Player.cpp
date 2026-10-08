@@ -1,8 +1,20 @@
 #include "Player.h"
-#include <GLFW/glfw3.h>
+#include "../window/Window.h"
 #include <cmath>
 
 static const float DEG2RAD = 3.14159265f / 180.0f;
+
+void Player::update(Window& window) {
+    if (window.paused) return;
+
+    look(window.mouse_dx, window.mouse_dy);
+
+    float step = 0.025f;
+    if (window.keyDown(GLFW_KEY_W)) move(0, step);
+    if (window.keyDown(GLFW_KEY_S)) move(0, -step);
+    if (window.keyDown(GLFW_KEY_A)) move(-step, 0);
+    if (window.keyDown(GLFW_KEY_D)) move(step, 0);
+}
 
 void Player::look(float dx, float dy) {
     yaw += dx;
