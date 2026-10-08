@@ -1,24 +1,9 @@
 #pragma once
-#include "Terrain.h"
-#include <map>
-#include <vector>
+#include "ChunkedTerrain.h"
 
-struct Chunk {
-    int x, z;
-    std::vector<float> heights;
-};
-
-class FlatTerrain : public Terrain {
+class FlatTerrain : public ChunkedTerrain {
 public:
     float height = 0;
-    int chunkSize = 16;
-    int viewDistance = 10;
 
-    float heightAt(float x, float z) override;
-    void update(float playerX, float playerZ) override;
-    void draw() override;
-
-private:
-    std::map<std::pair<int, int>, Chunk> chunks;
-    Chunk makeChunk(int cx, int cz);
+    float heightAt(float x, float z) override { return height; }
 };

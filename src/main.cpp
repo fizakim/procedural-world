@@ -1,12 +1,12 @@
 #include "window/Window.h"
 #include "player/Player.h"
 #include "object/Sphere.h"
-#include "terrain/FlatTerrain.h"
+#include "terrain/PerlinTerrain.h"
 
 int main() {
     Window window(800, 600, "Game");
     Player player;
-    FlatTerrain terrain;
+    PerlinTerrain terrain;
     terrain.setPattern(std::make_unique<CheckeredPattern>());
 
     Sphere sphere;
