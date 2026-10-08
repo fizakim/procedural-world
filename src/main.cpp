@@ -7,6 +7,7 @@ int main() {
     Window window(800, 600, "Game");
     Player player;
     FlatTerrain terrain;
+    terrain.setPattern(std::make_unique<CheckeredPattern>());
 
     Sphere sphere;
     sphere.y = 1.5f;

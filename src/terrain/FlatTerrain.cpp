@@ -44,12 +44,13 @@ void FlatTerrain::draw() {
     int w = chunkSize + 1;
 
     glBegin(GL_QUADS);
-    glColor3f(0.3f, 0.6f, 0.3f);
     for (auto& [pos, chunk] : chunks) {
         for (int j = 0; j < chunkSize; j++) {
             for (int i = 0; i < chunkSize; i++) {
                 float x = chunk.x * chunkSize + i;
                 float z = chunk.z * chunkSize + j;
+                Color c = pattern->colorAt(x + 0.5f, z + 0.5f);
+                glColor3f(c.r, c.g, c.b);
                 glVertex3f(x, chunk.heights[j * w + i], z);
                 glVertex3f(x, chunk.heights[(j + 1) * w + i], z + 1);
                 glVertex3f(x + 1, chunk.heights[(j + 1) * w + i + 1], z + 1);
