@@ -63,4 +63,29 @@ void ChunkedTerrain::draw() {
         }
     }
     glEnd();
+
+    if (!showChunkBorders) return;
+
+    float lift = 0.05f;
+    glColor3f(1, 0, 0);
+    for (auto& entry : chunks) {
+        Chunk& chunk = entry.second;
+        float x0 = chunk.x * chunkSize;
+        float z0 = chunk.z * chunkSize;
+
+        glBegin(GL_LINE_LOOP);
+        for (int i = 0; i < chunkSize; i++) {
+            glVertex3f(x0 + i, chunk.heights[i] + lift, z0);
+        }
+        for (int j = 0; j < chunkSize; j++) {
+            glVertex3f(x0 + chunkSize, chunk.heights[j * w + chunkSize] + lift, z0 + j);
+        }
+        for (int i = chunkSize; i > 0; i--) {
+            glVertex3f(x0 + i, chunk.heights[chunkSize * w + i] + lift, z0 + chunkSize);
+        }
+        for (int j = chunkSize; j > 0; j--) {
+            glVertex3f(x0, chunk.heights[j * w] + lift, z0 + j);
+        }
+        glEnd();
+    }
 }

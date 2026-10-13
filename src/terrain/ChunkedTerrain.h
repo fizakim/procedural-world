@@ -11,7 +11,8 @@ struct Chunk {
 class ChunkedTerrain : public Terrain {
 public:
     int chunkSize = 16;
-    int viewDistance = 10;
+    int viewDistance = 2;
+    bool showChunkBorders = false;
 
     void update(float playerX, float playerZ) override;
     void draw() override;
