@@ -8,9 +8,13 @@ int main() {
     Player player;
     PerlinTerrain terrain;
     terrain.setPattern(std::make_unique<CheckeredPattern>());
+    terrain.seed = 1;
+    terrain.chunkSize = 16;
+    terrain.viewDistance = 2;
     terrain.showChunkBorders = true;
 
     SphereField spheres;
+    spheres.seed = 1;
 
     while (window.isOpen()) {
         window.update();

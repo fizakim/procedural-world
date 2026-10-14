@@ -7,7 +7,8 @@ float randomFloat() {
     return rand() / (float)RAND_MAX;
 }
 
-std::vector<Sphere> SphereField::makeChunk(int cx, int cz, Terrain& terrain) {
+std::vector<Sphere> SphereField::makeChunk(int cx, int cz, ChunkedTerrain& terrain) {
+    int chunkSize = terrain.chunkSize;
     srand(cx * 7919 + cz * 104729 + seed);
 
     std::vector<Sphere> spheres;
@@ -23,7 +24,9 @@ std::vector<Sphere> SphereField::makeChunk(int cx, int cz, Terrain& terrain) {
     return spheres;
 }
 
-void SphereField::update(float playerX, float playerZ, Terrain& terrain) {
+void SphereField::update(float playerX, float playerZ, ChunkedTerrain& terrain) {
+    int chunkSize = terrain.chunkSize;
+    int viewDistance = terrain.viewDistance;
     int px = floor(playerX / chunkSize);
     int pz = floor(playerZ / chunkSize);
 
